@@ -1,0 +1,12 @@
+esqdir = 0
+cimabaixo = 0
+aux1 = 0
+aux2 = 0
+aux3 = 0
+aux4 = 0
+angulo = 30
+tempoesteira = 0
+liga_esteira_dir = 0
+fire = 0
+angulocanhao = 0
+bala_xi= 0
