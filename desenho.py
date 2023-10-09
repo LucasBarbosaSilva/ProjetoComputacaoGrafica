@@ -20,5 +20,8 @@ def desenho():
     global bala_xi
 
     eixos.eixos()
-
+    glPushMatrix()
+    glTranslate(-2, 0, -4)
+    parede()
+    glPopMatrix()
     piso()

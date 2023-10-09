@@ -60,7 +60,8 @@ def tela():
     #    eyex, eyey, eyez = posicao da camera
     #    alvox, alvoy, alvoz = coordenada para onde a camera olha.
     #    upx, upy, upz = indica a posicao vertical da camera.
-    gluLookAt(sin(esqDirCamIni)*10, 0 + yCamIni, -400, xCamFim, yCamFim, zCamFim, 0,1,0) # Especifica posicao do observador e do alvo
+    #                    (x, y, z) Câmera                 |   (x, y, z,) Objeto      |   posicao 
+    gluLookAt(xCamIni, 1 + yCamIni, cos(zCamIni)*4, xCamFim, yCamFim, zCamFim, 0,1,0) # Especifica posicao do observador e do alvo
     iluminacao_da_cena()
     glEnable(GL_DEPTH_TEST) # verifica os pixels que devem ser plotados no desenho 3d
     
@@ -69,17 +70,20 @@ def tela():
     glFlush()                    # Aplica o desenho
 
 def resetGame():
-    global esqDirCamIni
+    global xCamIni
     global yCamIni
+    global zCamIni
     global xCamFim
     global yCamFim
     global zCamFim
-    esqDirCamIni, yCamIni, xCamFim, yCamFim, zCamFim = 0, 0, 0, 0, 0
+    xCamIni, yCamIni, zCamIni, xCamFim, yCamFim, zCamFim = 0, 1, 0, 0, 1, 0
 
 # Funcao callback chamada para gerenciar eventos de teclas normais 
 def Teclado (tecla, x, y):
     global esqDirCamIni
+    global xCamIni
     global yCamIni
+    global zCamIni
     global zCamIni
     global xCamFim
     global yCamFim
@@ -104,6 +108,7 @@ def Teclado (tecla, x, y):
         print(xCamFim)
         if (xCamFim - 0.1 >= (-widthTela/2)+(widthPersonagem/2)):
             xCamFim -= 0.1
+            xCamIni -= 0.1
             print("Andou")
 	
     if tecla == b'd': # D -> Direita
@@ -111,6 +116,7 @@ def Teclado (tecla, x, y):
         print(xCamFim)
         if (xCamFim + 0.1 <= (widthTela/2)-(widthPersonagem/2)):
             xCamFim += 0.1
+            xCamIni += 0.1
             print("Andou")
 
         
@@ -131,8 +137,8 @@ def Teclado (tecla, x, y):
 
 # Funcao callback chamada para gerenciar eventos de teclas especiais
 def TeclasEspeciais (tecla, x, y):
-    global esqDirCamIni
-    global yCamIni
+    global xCamFim
+    global yCamFim
     print("*** Tratamento de teclas especiais")
     print ("tecla: ", tecla)
     if tecla == GLUT_KEY_F1:
@@ -142,13 +148,13 @@ def TeclasEspeciais (tecla, x, y):
     elif tecla == GLUT_KEY_F3:
         print(">>> Tecla F3 pressionada")
     elif tecla == GLUT_KEY_LEFT:
-        esqDirCamIni -= 0.1
+        xCamFim -= 0.1
     elif tecla == GLUT_KEY_RIGHT:
-        esqDirCamIni += 0.1
+        xCamFim += 0.1
     elif tecla == GLUT_KEY_UP:
-        yCamIni += 0.1
+        yCamFim += 0.1
     elif tecla == GLUT_KEY_DOWN:
-        yCamIni -= 0.1
+        yCamFim -= 0.1
     else:
         print ("Apertou... " , tecla)
     tela()
