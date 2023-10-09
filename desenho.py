@@ -4,6 +4,8 @@ from OpenGL.GLUT import *
 import eixos
 import variaveisGlobais
 from parede import *
+from piso import *
+
 def desenho():
     global xCamIni
     global yCamIni
@@ -15,4 +17,8 @@ def desenho():
     global liga_esteira_dir
     global fire
     global angulocanhao
-    global bala_xi    
+    global bala_xi
+
+    eixos.eixos()
+
+    piso()
