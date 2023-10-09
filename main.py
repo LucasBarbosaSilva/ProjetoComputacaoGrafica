@@ -26,8 +26,7 @@ global distancia
 from variaveisGlobais import *
 from iluminacao import *
 from desenho import *
-
-
+from parede import *
 
 def trajetoria_tiro_y(angulo, x):
     posicao_z = tan(angulo) * x +  0.15   # verificar o ajuste para funcao. 
@@ -61,17 +60,34 @@ def tela():
     #    eyex, eyey, eyez = posicao da camera
     #    alvox, alvoy, alvoz = coordenada para onde a camera olha.
     #    upx, upy, upz = indica a posicao vertical da camera.
-    gluLookAt(sin(esqdir) * 10, 0 + cimabaixo ,cos(esqdir) * 10, aux1,aux2,0, 0,1,0) # Especifica posicao do observador e do alvo
+    gluLookAt(sin(esqDirCamIni)*10, 0 + yCamIni, -400, xCamFim, yCamFim, zCamFim, 0,1,0) # Especifica posicao do observador e do alvo
     iluminacao_da_cena()
     glEnable(GL_DEPTH_TEST) # verifica os pixels que devem ser plotados no desenho 3d
-
+    
     desenho()                    
+    
     glFlush()                    # Aplica o desenho
+
+def resetGame():
+    global esqDirCamIni
+    global yCamIni
+    global xCamFim
+    global yCamFim
+    global zCamFim
+    esqDirCamIni, yCamIni, xCamFim, yCamFim, zCamFim = 0, 0, 0, 0, 0
 
 # Funcao callback chamada para gerenciar eventos de teclas normais 
 def Teclado (tecla, x, y):
+    global esqDirCamIni
+    global yCamIni
+    global zCamIni
+    global xCamFim
+    global yCamFim
+    global zCamFim
     global aux1
     global aux2
+    global esqdir
+    global esqdir
     global tempoesteira
     global liga_esteira_dir
     global fire
@@ -84,28 +100,39 @@ def Teclado (tecla, x, y):
         sys.exit(0)
 
     if tecla == b'a':  # A -> Esqueda
-        aux1 = aux1 - 0.1
-        print ("aux1 = ", aux1 )
+        print((-widthTela/2)+(widthPersonagem/2))
+        print(xCamFim)
+        if (xCamFim - 0.1 >= (-widthTela/2)+(widthPersonagem/2)):
+            xCamFim -= 0.1
+            print("Andou")
 	
     if tecla == b'd': # D -> Direita
-        aux1 = aux1 + 0.1
-        print ("aux1 = ", aux1 )
-        
-    if tecla == b'w': # W -> Para cima
-        aux2 = aux2 + 0.1
-        print ("aux2 = ", aux2 )
+        print((widthTela/2)-(widthPersonagem/2))
+        print(xCamFim)
+        if (xCamFim + 0.1 <= (widthTela/2)-(widthPersonagem/2)):
+            xCamFim += 0.1
+            print("Andou")
 
-    if tecla == b's': # S -> Para baixo
-        aux2 = aux2 - 0.1
-        print ("aux2 = ", aux2 )
+        
+    # if tecla == b'w': # W -> Para cima
+    #     yCamFim += 0.1
+    #     print ("aux2 = ", yCamFim )
+
+    # if tecla == b's': # S -> Para baixo
+    #     yCamFim -= 0.1
+    #     print ("aux2 = ", yCamFim )
+
+    if tecla == b'r':
+        resetGame()
+
     
     tela()
     glutPostRedisplay()
 
 # Funcao callback chamada para gerenciar eventos de teclas especiais
 def TeclasEspeciais (tecla, x, y):
-    global esqdir
-    global cimabaixo
+    global esqDirCamIni
+    global yCamIni
     print("*** Tratamento de teclas especiais")
     print ("tecla: ", tecla)
     if tecla == GLUT_KEY_F1:
@@ -115,13 +142,13 @@ def TeclasEspeciais (tecla, x, y):
     elif tecla == GLUT_KEY_F3:
         print(">>> Tecla F3 pressionada")
     elif tecla == GLUT_KEY_LEFT:
-        esqdir = esqdir - 0.1
+        esqDirCamIni -= 0.1
     elif tecla == GLUT_KEY_RIGHT:
-        esqdir = esqdir + 0.1
+        esqDirCamIni += 0.1
     elif tecla == GLUT_KEY_UP:
-        cimabaixo = cimabaixo + 0.1
+        yCamIni += 0.1
     elif tecla == GLUT_KEY_DOWN:
-        cimabaixo = cimabaixo - 0.1
+        yCamIni -= 0.1
     else:
         print ("Apertou... " , tecla)
     tela()
@@ -144,7 +171,7 @@ def ControleMouse(button, state, x, y):
 
 glutInit(argv)
 glutInitDisplayMode(GLUT_RGBA | GLUT_DEPTH)
-glutInitWindowSize(600,600)
+glutInitWindowSize(widthTela,heigthTela)
 glutCreateWindow(b"Projeto Final CG")
 distancia = 20
 glutDisplayFunc(tela)

@@ -2,14 +2,14 @@ from OpenGL.GL import *
 from OpenGL.GLU import *
 from OpenGL.GLUT import *
 
-from variaveisGlobais import angulo, angulocanhao, aux1, aux2, aux3, aux4, bala_xi, cimabaixo, esqdir, fire, liga_esteira_dir, tempoesteira
+from variaveisGlobais import *
 
 def iluminacao_da_cena():
     global aux1
     luzAmbiente=[0.2,0.2,0.2,1.0]
     luzDifusa=[0.7,0.7,0.7,1.0]  # ; // "cor"
     luzEspecular = [1.0, 1.0, 1.0, 1.0]  #;// "brilho"
-    posicaoLuz=[aux1, 50.0, 50.0, 1.0]
+    posicaoLuz=[posiLuz, 50.0, 50.0, 1.0]
 
     #Capacidade de brilho do material
     especularidade=[1.0,1.0,1.0,1.0]

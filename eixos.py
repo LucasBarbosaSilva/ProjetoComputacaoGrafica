@@ -1,8 +1,4 @@
-from OpenGL.GL import *
-from OpenGL.GLU import *
-from OpenGL.GLUT import *
-
-import variaveisGlobais
+from variaveisGlobais import *
 
 def eixos():      #desenha os eixos x e y do plano cartesiano.
     glColor3f(.9, .1, .1) # cor RGB  eixo X

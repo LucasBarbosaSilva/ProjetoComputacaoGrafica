@@ -1,7 +1,15 @@
-esqdir = 0
-cimabaixo = 0
-aux1 = 0
-aux2 = 0
+from OpenGL.GL import *
+from OpenGL.GLU import *
+from OpenGL.GLUT import *
+
+widthTela = 1080
+heigthTela = 720
+esqDirCamIni = 0
+yCamIni = 0
+zCamIni = 0
+xCamFim = 0
+yCamFim = 0
+zCamFim = 0
 aux3 = 0
 aux4 = 0
 angulo = 30
@@ -10,3 +18,5 @@ liga_esteira_dir = 0
 fire = 0
 angulocanhao = 0
 bala_xi= 0
+posiLuz = 0
+widthPersonagem = 20
