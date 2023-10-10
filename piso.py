@@ -10,10 +10,10 @@ def piso():
 
     glTranslate(0.0, 0.0, 0.0)
     glBegin(GL_POLYGON)
-    glVertex3f(2.0, 0.0, -6.0)
+    glVertex3f(2.0, 0.0, -12.0)
     glVertex3f(2.0, 0.0, 6.0)
     glVertex3f(-2.0, 0.0, 6.0)
-    glVertex3f(-2.0, 0.0, -6.0)
+    glVertex3f(-2.0, 0.0, -12.0)
     glEnd()
 
     glPopMatrix()

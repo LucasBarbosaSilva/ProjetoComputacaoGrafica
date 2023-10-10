@@ -28,15 +28,11 @@ from iluminacao import *
 from desenho import *
 from parede import *
 
-def trajetoria_tiro_y(angulo, x):
-    posicao_z = tan(angulo) * x +  0.15   # verificar o ajuste para funcao. 
-    return posicao_z
-
 def tela():
     global angulo
     global mode
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT) # Limpar a tela
-    glClearColor(1.0, 1.0, 1.0, 1.0) # Limpa a janela com a cor especificada
+    glClearColor(0, 0, 0, 0) # Limpa a janela com a cor especificada
     glMatrixMode(GL_PROJECTION) # Muda a matriz de projecao
     glLoadIdentity()# carrega a matriz identidade
 
