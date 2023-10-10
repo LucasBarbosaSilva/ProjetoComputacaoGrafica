@@ -54,14 +54,14 @@ class Parede:
         glPushMatrix()
         glTranslate(-2, 0, self.zPos)
         
-        glColor3f(0, 0, 1) # cor RGB  eixo X
+        # glColor3f(0, 0, 1) # cor RGB  eixo X
         glPushMatrix()                # Push e Pop Isolam os efeitos das transformacoes no objeto
         
         glTranslate( 0, 0, 0)
-        tex = read_texture('imagens/gritwall2.jpg')
-        glEnable(GL_TEXTURE_2D)
-        glBindTexture(GL_TEXTURE_2D, tex)
-        glColor3f(0, 0, 1)
+        # tex = read_texture('imagens/gritwall2.jpg')
+        # glEnable(GL_TEXTURE_2D)
+        # glBindTexture(GL_TEXTURE_2D, tex)
+        glColor3f(0.63, 0.33, 0.95)
 
         glBegin(GL_POLYGON)
         
