@@ -163,13 +163,11 @@ def TeclasEspeciais (tecla, x, y):
     glutPostRedisplay()   
 
 def Timer(tempo):
-    print("Timer rodando")
-
     for p in paredes:
         p.atualizarPos()
 
     glutPostRedisplay()
-    glutTimerFunc(33,Timer, 0)
+    glutTimerFunc(100,Timer, 0)
 
 # Funcao callback chamada para gerenciar eventos do mouse
 def ControleMouse(button, state, x, y):
@@ -194,7 +192,7 @@ distancia = 20
 glutDisplayFunc(tela)
 glutMouseFunc(ControleMouse)
 glutKeyboardFunc (Teclado)
-glutTimerFunc(33,Timer, 0)
+glutTimerFunc(100,Timer, 0)
 glutSpecialFunc (TeclasEspeciais)
 glutMainLoop()  # Inicia o laco de eventos da GLUT
 
