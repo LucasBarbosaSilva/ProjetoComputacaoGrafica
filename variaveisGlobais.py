@@ -22,3 +22,4 @@ angulocanhao = 0
 bala_xi= 0
 posiLuz = 0
 widthPersonagem = 20
+mode = 1

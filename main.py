@@ -31,7 +31,7 @@ from parede import *
 def trajetoria_tiro_y(angulo, x):
     posicao_z = tan(angulo) * x +  0.15   # verificar o ajuste para funcao. 
     return posicao_z
-mode = 1
+
 def tela():
     global angulo
     global mode
@@ -79,7 +79,8 @@ def resetGame():
     global xCamFim
     global yCamFim
     global zCamFim
-    xCamIni, yCamIni, zCamIni, xCamFim, yCamFim, zCamFim = 0, 1, 0, 0, 1, 0
+    global mode
+    xCamIni, yCamIni, zCamIni, xCamFim, yCamFim, zCamFim, mode = 0, 1, 0, 0, 1, 0, 0
 
 # Funcao callback chamada para gerenciar eventos de teclas normais 
 def Teclado (tecla, x, y):
@@ -99,7 +100,8 @@ def Teclado (tecla, x, y):
     global liga_esteira_dir
     global fire
     global angulocanhao
-    
+    global mode
+
     print("*** Tratamento de teclas comuns")
     print(">>> Tecla: ",tecla)
 	
@@ -124,6 +126,9 @@ def Teclado (tecla, x, y):
 
     if tecla == b'r':
         resetGame()
+
+    if tecla == b'c':
+        mode = (mode+1) % 2
     
     tela()
     glutPostRedisplay()
