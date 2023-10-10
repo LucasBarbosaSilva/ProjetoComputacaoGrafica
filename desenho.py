@@ -5,7 +5,7 @@ import eixos
 import variaveisGlobais
 from parede import *
 from piso import *
-
+from paredeLateral import *
 def desenho():
     global xCamIni
     global yCamIni
@@ -29,3 +29,14 @@ def desenho():
     parede()
     glPopMatrix()
     piso()
+    # Paredes laterais
+    glPushMatrix()
+    glTranslate(-2, 0, 6)
+    paredeLateral()    
+    glPopMatrix()
+    glPushMatrix()
+    glTranslate(2, 0, 6)
+    paredeLateral()    
+    glPopMatrix()
+    
+

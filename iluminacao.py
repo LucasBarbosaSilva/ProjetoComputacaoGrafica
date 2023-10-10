@@ -15,9 +15,6 @@ def iluminacao_da_cena():
     especularidade=[1.0,1.0,1.0,1.0]
     especMaterial = 60
 
-    # Especifica que a cor de fundo da janela sera branca
-    glClearColor(1.0, 1.0, 1.0, 1.0)
-
     # Habilita o modelo de colorizacao de Gouraud
     glShadeModel(GL_SMOOTH)
 
