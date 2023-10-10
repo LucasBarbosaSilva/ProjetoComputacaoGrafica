@@ -21,7 +21,11 @@ def desenho():
 
     eixos.eixos()
     glPushMatrix()
-    glTranslate(-2, 0, -4)
+    glTranslate(-2, 0, -6)
+    parede()
+    glPopMatrix()
+    glPushMatrix()
+    glTranslate(-2, 0, 0)
     parede()
     glPopMatrix()
     piso()

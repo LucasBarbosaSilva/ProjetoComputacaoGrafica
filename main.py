@@ -31,10 +31,10 @@ from parede import *
 def trajetoria_tiro_y(angulo, x):
     posicao_z = tan(angulo) * x +  0.15   # verificar o ajuste para funcao. 
     return posicao_z
-
+mode = 1
 def tela():
     global angulo
-    
+    global mode
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT) # Limpar a tela
     glClearColor(1.0, 1.0, 1.0, 1.0) # Limpa a janela com a cor especificada
     glMatrixMode(GL_PROJECTION) # Muda a matriz de projecao
@@ -60,8 +60,11 @@ def tela():
     #    eyex, eyey, eyez = posicao da camera
     #    alvox, alvoy, alvoz = coordenada para onde a camera olha.
     #    upx, upy, upz = indica a posicao vertical da camera.
-    #                    (x, y, z) Câmera                 |   (x, y, z,) Objeto      |   posicao 
-    gluLookAt(xCamIni, 1 + yCamIni, cos(zCamIni)*4, xCamFim, yCamFim, zCamFim, 0,1,0) # Especifica posicao do observador e do alvo
+    if(mode == 0):
+    #                    (x, y, z) Câmera                   |   (x, y, z,) Objeto      |   posicao 
+        gluLookAt(xCamIni, 1 + yCamIni, cos(zCamIni)*4, xCamFim, yCamFim, zCamFim, 0,1,0) # Especifica posicao do observador e do alvo
+    else:
+        gluLookAt(0, 5, 8, xCamFim, yCamFim, zCamFim, 0,1,0) # Especifica posicao do observador e do alvo
     iluminacao_da_cena()
     glEnable(GL_DEPTH_TEST) # verifica os pixels que devem ser plotados no desenho 3d
     
@@ -119,18 +122,8 @@ def Teclado (tecla, x, y):
             xCamIni += 0.1
             print("Andou")
 
-        
-    # if tecla == b'w': # W -> Para cima
-    #     yCamFim += 0.1
-    #     print ("aux2 = ", yCamFim )
-
-    # if tecla == b's': # S -> Para baixo
-    #     yCamFim -= 0.1
-    #     print ("aux2 = ", yCamFim )
-
     if tecla == b'r':
         resetGame()
-
     
     tela()
     glutPostRedisplay()
@@ -160,6 +153,11 @@ def TeclasEspeciais (tecla, x, y):
     tela()
     glutPostRedisplay()   
 
+def Timer(tempo):
+    print("Timer rodando")
+    glutPostRedisplay()
+    glutTimerFunc(33,Timer, 0)
+
 # Funcao callback chamada para gerenciar eventos do mouse
 def ControleMouse(button, state, x, y):
     global angulo
@@ -183,6 +181,7 @@ distancia = 20
 glutDisplayFunc(tela)
 glutMouseFunc(ControleMouse)
 glutKeyboardFunc (Teclado)
+glutTimerFunc(33,Timer, 0)
 glutSpecialFunc (TeclasEspeciais)
 glutMainLoop()  # Inicia o laco de eventos da GLUT
 
