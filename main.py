@@ -97,7 +97,9 @@ def resetGame():
     global mode
     global variaveisIniciais
     global paredes
+    global statusJogo
     xPersonagem, yPersonagem, zPersonagem, xCamFim, yCamFim, zCamFim, mode = variaveisIniciais
+    statusJogo = 0
     # paredes = Parede.criarParedes(qtd=4, espacamento=6)
 
 # Funcao callback chamada para gerenciar eventos de teclas normais 

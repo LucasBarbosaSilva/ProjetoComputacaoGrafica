@@ -24,7 +24,7 @@ bala_xi= 0
 posiLuz = 0
 widthPersonagem = 0.5
 raioPersonagem = widthPersonagem/2
-mode = 0
+mode = 1
 
 velocidade = 0.5#0.05
 espacamentoParedes = 6 # Espaço até a próxima parede
