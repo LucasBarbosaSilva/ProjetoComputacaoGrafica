@@ -63,12 +63,15 @@ class Parede:
         glPushMatrix()                # Push e Pop Isolam os efeitos das transformacoes no objeto
         
         glTranslate( 0, 0, 0)
-        # tex = read_texture('parede.jpg')
+        # tex = read_texture('imagens/gritwall2.jpg')
         # glEnable(GL_TEXTURE_2D)
         # glBindTexture(GL_TEXTURE_2D, tex)
 
+        glColor3f(0.63, 0.33, 0.95)
+
         glBegin(GL_POLYGON)
-        
+
+#        glColor3f(0.63, 0.33, 0.95)        
         # glVertex3f(self.portaPos, 2, 0) 
         # glVertex3f(self.portaPos, 0, 0)     
 
@@ -85,7 +88,7 @@ class Parede:
         glVertex3f(self.portaPos, 0, 0)     
         glEnd()
 
-    #    glDisable(GL_TEXTURE_2D)
+        glDisable(GL_TEXTURE_2D)
 
         glBegin(GL_POLYGON)
         glTexCoord2f (0.0, 0.0);

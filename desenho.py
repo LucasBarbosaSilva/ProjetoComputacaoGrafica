@@ -30,8 +30,6 @@ def desenho():
     # parede()
     # glPopMatrix()
 
-    eixos.eixos()
-
     for p in paredes:
         p.desenhar()
 

@@ -39,7 +39,7 @@ def personagem():
     glPushMatrix()
     color = [0.4, 0.4, 0.2, 1.0]
     glMaterialfv(GL_FRONT, GL_DIFFUSE, color)
-    glutSolidSphere(widthPersonagem/2, 100, 20)
+    glutSolidSphere(raioPersonagem, 100, 20)
     glPopMatrix()
 
 def tela():
@@ -88,7 +88,19 @@ def tela():
     glFlush()                    # Aplica o desenho
 
 def resetGame():
-    xPersonagem, yPersonagem, zPersonagem, xCamFim, yCamFim, zCamFim, mode = 0, 1, 4, 0, 1, 0, 0
+    global xPersonagem 
+    global yPersonagem
+    global zPersonagem
+    global xCamFim
+    global yCamFim
+    global zCamFim
+    global mode
+    global variaveisIniciais
+    global paredes
+    global statusJogo
+    xPersonagem, yPersonagem, zPersonagem, xCamFim, yCamFim, zCamFim, mode = variaveisIniciais
+    statusJogo = 0
+    # paredes = Parede.criarParedes(qtd=4, espacamento=6)
 
 # Funcao callback chamada para gerenciar eventos de teclas normais 
 def Teclado (tecla, x, y):
@@ -110,6 +122,7 @@ def Teclado (tecla, x, y):
     global yCamFim
     global zCamFim
     global mode
+    global statusJogo
     print("*** Tratamento de teclas comuns")
     print(">>> Tecla: ",tecla)
 	
@@ -133,6 +146,8 @@ def Teclado (tecla, x, y):
 
     if tecla == b'c':
         mode = (mode+1) % 2
+    if tecla == b's':
+        statusJogo = (statusJogo+1) % 2
     
     tela()
     glutPostRedisplay()
@@ -163,13 +178,25 @@ def TeclasEspeciais (tecla, x, y):
     glutPostRedisplay()   
 
 def Timer(tempo):
-    print("Timer rodando")
+    global xPersonagem
+    global zPersonagem
+    global raioPersonagem
+    global statusJogo
+    if(statusJogo == 1):
+        for p in paredes:
+            p.atualizarPos()
+            print("xPersonagem - raioPersonagem: ",(xPersonagem - raioPersonagem))
+            print("xPersonagem + raioPersonagem: ",(xPersonagem + raioPersonagem))
+            print("p.portaPos: ",p.portaPos)
+            if(((xPersonagem - raioPersonagem)<= (p.portaPos)-2) and ((zPersonagem-raioPersonagem)<=p.zPos and (zPersonagem+raioPersonagem)>=p.zPos)
+            or ((xPersonagem + raioPersonagem)>= (p.portaPos+p.portaLargura)-2) and ((zPersonagem-raioPersonagem)<=p.zPos and (zPersonagem+raioPersonagem)>=p.zPos)
+            ):
+                resetGame()
+                break
 
-    for p in paredes:
-        p.atualizarPos()
-
+    
     glutPostRedisplay()
-    glutTimerFunc(33,Timer, 0)
+    glutTimerFunc(100,Timer, 0)
 
 # Funcao callback chamada para gerenciar eventos do mouse
 def ControleMouse(button, state, x, y):
@@ -194,7 +221,7 @@ distancia = 20
 glutDisplayFunc(tela)
 glutMouseFunc(ControleMouse)
 glutKeyboardFunc (Teclado)
-glutTimerFunc(33,Timer, 0)
+glutTimerFunc(100,Timer, 0)
 glutSpecialFunc (TeclasEspeciais)
 glutMainLoop()  # Inicia o laco de eventos da GLUT
 
