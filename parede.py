@@ -22,11 +22,12 @@ class Parede:
 
         self.portaLargura = minPorta + random()*(maxPorta-minPorta)
         self.portaPos = random()*(larguraCampo-self.portaLargura)
-        # self.portaLargura = 1
-        # self.portaPos = (larguraCampo-self.portaLargura)/2
 
         self.espacamento = espacamento
         self.qtdParedes = qtdParedes
+
+        # 2: normal; 1: próximo; 0: muito próximo
+        self.proxPersonagem = 2
 
     @staticmethod
     def criarParedes(qtd, espacamento):
@@ -36,9 +37,13 @@ class Parede:
     
     def atualizarPos(self):
         self.zPos += velocidade
-    
-        # TODO: Deletar. Apenas para demonstração (muda de cor ao se aproximar)
-        self.color = (0.2, 0.2, 1) if self.zPos >= 0 else (0, 0, 1)
+
+        if 3 > self.zPos >= 0: # 3 > self.zPos >= 1
+            self.proxPersonagem = 2
+        # elif 3 > self.zPos >= -2:
+        #     self.proxPersonagem = 1
+        else:
+            self.proxPersonagem = 0
 
 
         if self.zPos >= self.espacamento:
@@ -54,7 +59,7 @@ class Parede:
         glPushMatrix()
         glTranslate(-2, 0, self.zPos)
         
-        # glColor3f(0, 0, 1) # cor RGB  eixo X
+        glColor3f(0, 0, 1)
         glPushMatrix()                # Push e Pop Isolam os efeitos das transformacoes no objeto
         
         glTranslate( 0, 0, 0)
