@@ -26,8 +26,9 @@ widthPersonagem = 0.5
 raioPersonagem = widthPersonagem/2
 mode = 1
 
-velocidade = 0.5#0.05
-espacamentoParedes = 6 # Espaço até a próxima parede
+velocidade = 0.2
+aceleracao = 0.001
+espacamentoParedes = 10 # Espaço até a próxima parede
 numParedes = 4 # Número de paredes visíveis
 minPorta = 1
 maxPorta = 2.8
@@ -35,3 +36,6 @@ maxPorta = 2.8
 larguraCampo = 4
 variaveisIniciais = [xPersonagem, yPersonagem, zPersonagem, xCamFim, yCamFim, zCamFim, mode]
 statusJogo = 0
+
+tamanhoPiso = 30
+zPositivo = 6

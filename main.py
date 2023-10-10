@@ -36,8 +36,9 @@ from desenho import *
 from parede import *
 
 def personagem():
+    color = [1, 0.8, 0.1, 1.0]
+    glColor4f(*color)
     glPushMatrix()
-    color = [0.4, 0.4, 0.2, 1.0]
     glMaterialfv(GL_FRONT, GL_DIFFUSE, color)
     glutSolidSphere(raioPersonagem, 100, 20)
     glPopMatrix()
@@ -83,7 +84,10 @@ def tela():
     glPushMatrix()
     glTranslate(xPersonagem, yPersonagem, zPersonagem)
     personagem()    
-    glPopMatrix()                 
+    glPopMatrix()   
+
+    for p in paredes:
+        p.desenhar()
     
     glFlush()                    # Aplica o desenho
 
@@ -98,9 +102,16 @@ def resetGame():
     global variaveisIniciais
     global paredes
     global statusJogo
+    global numParedes
+    global espacamentoParedes
+
     xPersonagem, yPersonagem, zPersonagem, xCamFim, yCamFim, zCamFim, mode = variaveisIniciais
     statusJogo = 0
-    # paredes = Parede.criarParedes(qtd=4, espacamento=6)
+    paredes = Parede.criarParedes(qtd=numParedes, espacamento=espacamentoParedes)
+    
+    #glutPostRedisplay()
+    # glutTimerFunc(100,Timer, 0)
+
 
 # Funcao callback chamada para gerenciar eventos de teclas normais 
 def Teclado (tecla, x, y):
@@ -182,12 +193,15 @@ def Timer(tempo):
     global zPersonagem
     global raioPersonagem
     global statusJogo
+    global aceleracao
+    global velocidade
+
+
     if(statusJogo == 1):
+        velocidade += aceleracao
+
         for p in paredes:
-            p.atualizarPos()
-            print("xPersonagem - raioPersonagem: ",(xPersonagem - raioPersonagem))
-            print("xPersonagem + raioPersonagem: ",(xPersonagem + raioPersonagem))
-            print("p.portaPos: ",p.portaPos)
+            p.atualizarPos(velocidade)            
             if(((xPersonagem - raioPersonagem)<= (p.portaPos)-2) and ((zPersonagem-raioPersonagem)<=p.zPos and (zPersonagem+raioPersonagem)>=p.zPos)
             or ((xPersonagem + raioPersonagem)>= (p.portaPos+p.portaLargura)-2) and ((zPersonagem-raioPersonagem)<=p.zPos and (zPersonagem+raioPersonagem)>=p.zPos)
             ):

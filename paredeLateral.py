@@ -9,23 +9,25 @@ def paredeLateral():
     glPushMatrix()    
 
     glTranslate(0, 0, 0)
-    tex = read_texture('imagens/concretetiles.jpg')
-    glEnable(GL_TEXTURE_2D)
-    glBindTexture(GL_TEXTURE_2D, tex)
+    # tex = read_texture('imagens/concretetiles.jpg')
+    # glEnable(GL_TEXTURE_2D)
+    # glBindTexture(GL_TEXTURE_2D, tex)
 
     glBegin(GL_POLYGON)
     glTexCoord2f (0.0, 3.0)
     glVertex3f(0, 3, 0)
     
     glTexCoord2f (3.0, 3.0)
-    glVertex3f(0, 3, -18)
+    glVertex3f(0, 3, -(tamanhoPiso+zPositivo))
 
     glTexCoord2f (3.0, 0.0)
-    glVertex3f(0, 0, -18)
+    glVertex3f(0, 0, -(tamanhoPiso+zPositivo))
 
     glTexCoord2f (0.0, 0.0)
     glVertex3f(0.0, 0.0, 0)    
     glEnd()
+
+    # glDisable(GL_TEXTURE_2D)
     glPopMatrix()
 
 def read_texture(filename):

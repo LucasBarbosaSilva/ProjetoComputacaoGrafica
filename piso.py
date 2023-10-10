@@ -4,7 +4,7 @@ from OpenGL.GLUT import *
 from PIL import Image as Image
 #import timeit
 import numpy
-import variaveisGlobais
+from variaveisGlobais import *
 
 def piso():
 #    pisotextura()
@@ -20,7 +20,7 @@ def piso():
     glBegin(GL_POLYGON)
     #gluCylinder(textura, largura da base, largura do topo, altura, resolucao , resolucao)
     glTexCoord2f (0.0, 0.0);
-    glVertex3f(2.0, 0.0, -12.0)
+    glVertex3f(2.0, 0.0, -tamanhoPiso)
 
     glTexCoord2f (3.0, 0.0);
     glVertex3f(2.0, 0.0, 6.0)
@@ -29,7 +29,7 @@ def piso():
     glVertex3f(-2.0, 0.0, 6.0)
 
     glTexCoord2f (0.0, 3.0);
-    glVertex3f(-2.0, 0.0, -12.0)
+    glVertex3f(-2.0, 0.0, -tamanhoPiso)
 
     glEnd()
     glDisable(GL_TEXTURE_2D)

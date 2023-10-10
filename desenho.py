@@ -30,24 +30,24 @@ def desenho():
     # parede()
     # glPopMatrix()
 
-    for p in paredes:
-        p.desenhar()
+    # for p in paredes:
+        # p.desenhar()
 
     piso()
 
 
     # Paredes laterais:
-    nivel = max(map(lambda p:p.proxPersonagem, paredes))
+    # nivel = max(map(lambda p:p.proxPersonagem, paredes))
 
-    glColor3f(*[(0.5, 0.5, 0.5),(1, 0.8, 0.2),(1, 0.2, 0.1)][nivel])
+    # glColor3f(*[(0.5, 0.5, 0.5),(1, 0.8, 0.2),(1, 0.2, 0.1)][nivel])
 
     glPushMatrix()
-    glTranslate(-2, 0, 6)
+    glTranslate(-2, 0, zPositivo)
     paredeLateral()    
     glPopMatrix()
 
     glPushMatrix()
-    glTranslate(2, 0, 6)
+    glTranslate(2, 0, zPositivo)
     paredeLateral()    
     glPopMatrix()    
     

@@ -17,7 +17,7 @@ class Parede:
         qtdParedes = numParedes
     ):
         self.zPos = zIniPos
-        self.color = (0, 0, 1)
+        self.color = (0.63, 0.33, 0.95)
 
 
         self.portaLargura = minPorta + random()*(maxPorta-minPorta)
@@ -35,16 +35,20 @@ class Parede:
             Parede(-i*espacamento, espacamento=espacamento, qtdParedes=qtd) for i in range(qtd)
         ]
     
-    def atualizarPos(self):
+    def atualizarPos(self, velocidade = velocidade):
         self.zPos += velocidade
 
-        if 3 > self.zPos >= 0: # 3 > self.zPos >= 1
-            self.proxPersonagem = 2
-        # elif 3 > self.zPos >= -2:
-        #     self.proxPersonagem = 1
-        else:
-            self.proxPersonagem = 0
+        # if 3 > self.zPos >= 0: # 3 > self.zPos >= 1
+        #     self.proxPersonagem = 2
+        # # elif 3 > self.zPos >= -2:
+        # #     self.proxPersonagem = 1
+        # else:
+        #     self.proxPersonagem = 0
 
+        if 4 > self.zPos >= 0:
+            self.color = (1,0,0)
+        else:
+            self.color = (0.63, 0.33, 0.95)
 
         if self.zPos >= self.espacamento:
             self.zPos = -self.espacamento*(self.qtdParedes-1)
@@ -59,15 +63,16 @@ class Parede:
         glPushMatrix()
         glTranslate(-2, 0, self.zPos)
         
-        glColor3f(0, 0, 1)
-        glPushMatrix()                # Push e Pop Isolam os efeitos das transformacoes no objeto
+        #glColor3f(0, 0, 1)
+        glColor3f(*self.color)
+        glPushMatrix()             # Push e Pop Isolam os efeitos das transformacoes no objeto
         
         glTranslate( 0, 0, 0)
         # tex = read_texture('imagens/gritwall2.jpg')
         # glEnable(GL_TEXTURE_2D)
         # glBindTexture(GL_TEXTURE_2D, tex)
 
-        glColor3f(0.63, 0.33, 0.95)
+        
 
         glBegin(GL_POLYGON)
 
@@ -88,7 +93,7 @@ class Parede:
         glVertex3f(self.portaPos, 0, 0)     
         glEnd()
 
-        glDisable(GL_TEXTURE_2D)
+        #glDisable(GL_TEXTURE_2D)
 
         glBegin(GL_POLYGON)
         glTexCoord2f (0.0, 0.0);
@@ -105,7 +110,7 @@ class Parede:
     
         glEnd()
 
-        glDisable(GL_TEXTURE_2D)
+        #glDisable(GL_TEXTURE_2D)
         
         glPopMatrix()
         glPopMatrix()
