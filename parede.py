@@ -36,7 +36,7 @@ class Parede:
     
     def atualizarPos(self):
         self.zPos += velocidade
-
+    
         # TODO: Deletar. Apenas para demonstração (muda de cor ao se aproximar)
         self.color = (0.2, 0.2, 1) if self.zPos >= 0 else (0, 0, 1)
 
@@ -58,9 +58,10 @@ class Parede:
         glPushMatrix()                # Push e Pop Isolam os efeitos das transformacoes no objeto
         
         glTranslate( 0, 0, 0)
-        tex = read_texture('parede.jpg')
+        tex = read_texture('imagens/gritwall2.jpg')
         glEnable(GL_TEXTURE_2D)
         glBindTexture(GL_TEXTURE_2D, tex)
+        glColor3f(0, 0, 1)
 
         glBegin(GL_POLYGON)
         
