@@ -23,10 +23,24 @@ global angulocanhao
 global liga_esteira_dir
 global bala_xi
 global distancia
+global xPersonagem
+global yPersonagem
+global zPersonagem
+global xCamFim
+global yCamFim
+global zCamFim
+global mode
 from variaveisGlobais import *
 from iluminacao import *
 from desenho import *
 from parede import *
+
+def personagem():
+    glPushMatrix()
+    color = [0.4, 0.4, 0.2, 1.0]
+    glMaterialfv(GL_FRONT, GL_DIFFUSE, color)
+    glutSolidSphere(widthPersonagem/2, 100, 20)
+    glPopMatrix()
 
 def tela():
     global angulo
@@ -61,44 +75,41 @@ def tela():
         # gluLookAt(xPersonagem, yPersonagem, cos(zPersonagem)*4, xCamFim, yCamFim, zCamFim, 0,1,0) # Especifica posicao do observador e do alvo
         gluLookAt(xPersonagem, yPersonagem, zPersonagem-1, xCamFim, yCamFim, zCamFim, 0,1,0) # Especifica posicao do observador e do alvo
     else:
-        gluLookAt(0, 5, 8, xCamFim, yCamFim, zCamFim, 0,1,0) # Especifica posicao do observador e do alvo
+        gluLookAt(0, 5, 12, xCamFim, yCamFim, zCamFim, 0,1,0) # Especifica posicao do observador e do alvo
     iluminacao_da_cena()
     glEnable(GL_DEPTH_TEST) # verifica os pixels que devem ser plotados no desenho 3d
     
-    desenho()                    
+    desenho()   
+    glPushMatrix()
+    glTranslate(xPersonagem, yPersonagem, zPersonagem)
+    personagem()    
+    glPopMatrix()                 
     
     glFlush()                    # Aplica o desenho
 
 def resetGame():
-    global xPersonagem
-    global yPersonagem
-    global zPersonagem
-    global xCamFim
-    global yCamFim
-    global zCamFim
-    global mode
-    xPersonagem, yPersonagem, zPersonagem, xCamFim, yCamFim, zCamFim, mode = 0, 1, 0, 0, 1, 0, 0
+    xPersonagem, yPersonagem, zPersonagem, xCamFim, yCamFim, zCamFim, mode = 0, 1, 4, 0, 1, 0, 0
 
 # Funcao callback chamada para gerenciar eventos de teclas normais 
 def Teclado (tecla, x, y):
-    global esqDirCamIni
+    global esqdir
+    global cimabaixo
+    global aux1
+    global aux2
+    global angulo
+    global tempoesteira
+    global fire
+    global angulocanhao
+    global liga_esteira_dir
+    global bala_xi
+    global distancia
     global xPersonagem
     global yPersonagem
-    global zPersonagem
     global zPersonagem
     global xCamFim
     global yCamFim
     global zCamFim
-    global aux1
-    global aux2
-    global esqdir
-    global esqdir
-    global tempoesteira
-    global liga_esteira_dir
-    global fire
-    global angulocanhao
     global mode
-
     print("*** Tratamento de teclas comuns")
     print(">>> Tecla: ",tecla)
 	
@@ -106,17 +117,13 @@ def Teclado (tecla, x, y):
         sys.exit(0)
 
     if tecla == b'a':  # A -> Esqueda
-        print((-widthTela/2)+(widthPersonagem/2))
-        print(xCamFim)
-        if (xCamFim - 0.1 >= (-widthTela/2)+(widthPersonagem/2)):
+        if (xCamFim - 0.1 >= (-widthCampo/2)+(widthPersonagem/2)):
             xCamFim -= 0.1
             xPersonagem -= 0.1
             print("Andou")
 	
     if tecla == b'd': # D -> Direita
-        print((widthTela/2)-(widthPersonagem/2))
-        print(xCamFim)
-        if (xCamFim + 0.1 <= (widthTela/2)-(widthPersonagem/2)):
+        if (xCamFim + 0.1 <= (widthCampo/2)-(widthPersonagem/2)):
             xCamFim += 0.1
             xPersonagem += 0.1
             print("Andou")
