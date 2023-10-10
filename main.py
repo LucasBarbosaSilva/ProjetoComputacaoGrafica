@@ -96,7 +96,9 @@ def resetGame():
     global zCamFim
     global mode
     global variaveisIniciais
+    global paredes
     xPersonagem, yPersonagem, zPersonagem, xCamFim, yCamFim, zCamFim, mode = variaveisIniciais
+    # paredes = Parede.criarParedes(qtd=4, espacamento=6)
 
 # Funcao callback chamada para gerenciar eventos de teclas normais 
 def Teclado (tecla, x, y):
@@ -118,6 +120,7 @@ def Teclado (tecla, x, y):
     global yCamFim
     global zCamFim
     global mode
+    global statusJogo
     print("*** Tratamento de teclas comuns")
     print(">>> Tecla: ",tecla)
 	
@@ -141,6 +144,8 @@ def Teclado (tecla, x, y):
 
     if tecla == b'c':
         mode = (mode+1) % 2
+    if tecla == b's':
+        statusJogo = (statusJogo+1) % 2
     
     tela()
     glutPostRedisplay()
@@ -174,13 +179,18 @@ def Timer(tempo):
     global xPersonagem
     global zPersonagem
     global raioPersonagem
-    for p in paredes:
-        p.atualizarPos()
-        if(((xPersonagem - raioPersonagem)<= p.portaPos) and ((zPersonagem-raioPersonagem)<=p.zPos and (zPersonagem+raioPersonagem)>=p.zPos)
-           or ((xPersonagem + raioPersonagem)>= p.portaPos+p.portaLargura) and ((zPersonagem-raioPersonagem)<=p.zPos and (zPersonagem+raioPersonagem)>=p.zPos)
-           ):
-            resetGame()
-            break
+    global statusJogo
+    if(statusJogo == 1):
+        for p in paredes:
+            p.atualizarPos()
+            print("xPersonagem - raioPersonagem: ",(xPersonagem - raioPersonagem))
+            print("xPersonagem + raioPersonagem: ",(xPersonagem + raioPersonagem))
+            print("p.portaPos: ",p.portaPos)
+            if(((xPersonagem - raioPersonagem)<= (p.portaPos)-2) and ((zPersonagem-raioPersonagem)<=p.zPos and (zPersonagem+raioPersonagem)>=p.zPos)
+            or ((xPersonagem + raioPersonagem)>= (p.portaPos+p.portaLargura)-2) and ((zPersonagem-raioPersonagem)<=p.zPos and (zPersonagem+raioPersonagem)>=p.zPos)
+            ):
+                resetGame()
+                break
 
     
     glutPostRedisplay()

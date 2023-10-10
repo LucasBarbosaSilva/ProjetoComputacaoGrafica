@@ -34,3 +34,4 @@ maxPorta = 2.8
 
 larguraCampo = 4
 variaveisIniciais = [xPersonagem, yPersonagem, zPersonagem, xCamFim, yCamFim, zCamFim, mode]
+statusJogo = 0
