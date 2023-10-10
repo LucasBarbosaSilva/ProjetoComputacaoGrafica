@@ -37,11 +37,17 @@ def desenho():
 
     piso()
 
-    # Paredes laterais
+
+    # Paredes laterais:
+    nivel = max(map(lambda p:p.proxPersonagem, paredes))
+
+    glColor3f(*[(0.5, 0.5, 0.5),(1, 0.8, 0.2),(1, 0.2, 0.1)][nivel])
+
     glPushMatrix()
     glTranslate(-2, 0, 6)
     paredeLateral()    
     glPopMatrix()
+
     glPushMatrix()
     glTranslate(2, 0, 6)
     paredeLateral()    
