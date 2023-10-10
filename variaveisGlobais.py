@@ -5,10 +5,11 @@ from OpenGL.GLUT import *
 widthTela = 1080
 heigthTela = 720
 esqDirCamIni = 0
-xCamIni = 0
-zCamIni = 0
-yCamIni = 1
-zCamIni = 0
+widthCampo = 4
+xPersonagem = 0
+zPersonagem = 0
+yPersonagem = 1
+zPersonagem = 4
 xCamFim = 0
 yCamFim = 1
 zCamFim = 0
@@ -21,5 +22,13 @@ fire = 0
 angulocanhao = 0
 bala_xi= 0
 posiLuz = 0
-widthPersonagem = 20
+widthPersonagem = 0.5
 mode = 0
+
+velocidade = 0.5#0.05
+espacamentoParedes = 6 # Espaço até a próxima parede
+numParedes = 4 # Número de paredes visíveis
+minPorta = 1
+maxPorta = 2.8
+
+larguraCampo = 4

@@ -4,62 +4,108 @@ import numpy
 from OpenGL.GL import *
 from OpenGL.GLU import *
 from OpenGL.GLUT import *
+from random import randrange, random
+
 from variaveisGlobais import *
 
-def parede():
-    glColor3f(0, 0, 1) # cor RGB  eixo X
-    glPushMatrix()                # Push e Pop Isolam os efeitos das transformacoes no objeto
+
+class Parede:
+    def __init__(
+        self,
+        zIniPos,
+        espacamento = espacamentoParedes,
+        qtdParedes = numParedes
+    ):
+        self.zPos = zIniPos
+        self.color = (0, 0, 1)
+
+
+        self.portaLargura = minPorta + random()*(maxPorta-minPorta)
+        self.portaPos = random()*(larguraCampo-self.portaLargura)
+        # self.portaLargura = 1
+        # self.portaPos = (larguraCampo-self.portaLargura)/2
+
+        self.espacamento = espacamento
+        self.qtdParedes = qtdParedes
+
+    @staticmethod
+    def criarParedes(qtd, espacamento):
+        return [
+            Parede(-i*espacamento, espacamento=espacamento, qtdParedes=qtd) for i in range(qtd)
+        ]
     
-    glTranslate( 0, 0, 0)
-    tex = read_texture('gritwall2.jpg')
-    glEnable(GL_TEXTURE_2D)
-    glBindTexture(GL_TEXTURE_2D, tex)
-    glColor3f(0, 0, 1)
-
-    glBegin(GL_POLYGON)
-    glTexCoord2f (0.0, 0.0);
-    glVertex3f(0, 0, 0) 
-
-    glTexCoord2f (3.0, 0.0);
-    glVertex3f(0, 2, 0) 
-
-    glTexCoord2f (3.0, 3.0);
-    glVertex3f(2, 2, 0)
-
-    glTexCoord2f (0.0, 3.0); 
-    glVertex3f(2, 0, 0)     
-    glEnd()
-
-#    glDisable(GL_TEXTURE_2D)
-
-    glBegin(GL_POLYGON)
-    glTexCoord2f (0.0, 0.0);
-    glVertex3f(3, 0, 0) 
-
-    glTexCoord2f (3.0, 0.0);
-    glVertex3f(3, 2, 0) 
-
-    glTexCoord2f (3.0, 3.0);
-    glVertex3f(4, 2, 0) 
-
-    glTexCoord2f (0.0, 3.0);
-    glVertex3f(4, 0, 0)     
-   
-    glEnd()
-
-    glDisable(GL_TEXTURE_2D)
+    def atualizarPos(self):
+        self.zPos += velocidade
     
-    glPopMatrix()
+        # TODO: Deletar. Apenas para demonstração (muda de cor ao se aproximar)
+        self.color = (0.2, 0.2, 1) if self.zPos >= 0 else (0, 0, 1)
 
-#def pisotextura():
-    #glColor3f(0.7, 0.7, 0.7) # cor RGB
-  #  glPushMatrix()
- #   glTranslate( 0.0, -1.0, 0.0)  #Transtacao do objeto
-    # Textured 
+
+        if self.zPos >= self.espacamento:
+            self.zPos = -self.espacamento*(self.qtdParedes-1)
+            # Definindo largura da nova porta:
+            self.portaLargura = minPorta + random()*(maxPorta-minPorta)
+            
+            # Definindo posição da passagem:
+            self.portaPos = random()*(larguraCampo-self.portaLargura)
+
+
+    def desenhar(self):
+        glPushMatrix()
+        glTranslate(-2, 0, self.zPos)
+        
+        glColor3f(0, 0, 1) # cor RGB  eixo X
+        glPushMatrix()                # Push e Pop Isolam os efeitos das transformacoes no objeto
+        
+        glTranslate( 0, 0, 0)
+        tex = read_texture('imagens/gritwall2.jpg')
+        glEnable(GL_TEXTURE_2D)
+        glBindTexture(GL_TEXTURE_2D, tex)
+        glColor3f(0, 0, 1)
+
+        glBegin(GL_POLYGON)
+        
+        # glVertex3f(self.portaPos, 2, 0) 
+        # glVertex3f(self.portaPos, 0, 0)     
+
+        glTexCoord2f (0.0, 0.0);
+        glVertex3f(0, 0, 0) 
+
+        glTexCoord2f (3.0, 0.0);
+        glVertex3f(0, 2, 0) 
+
+        glTexCoord2f (3.0, 3.0);
+        glVertex3f(self.portaPos, 2, 0)
+
+        glTexCoord2f (0.0, 3.0); 
+        glVertex3f(self.portaPos, 0, 0)     
+        glEnd()
+
+    #    glDisable(GL_TEXTURE_2D)
+
+        glBegin(GL_POLYGON)
+        glTexCoord2f (0.0, 0.0);
+        glVertex3f(self.portaPos+self.portaLargura, 0, 0) 
+
+        glTexCoord2f (3.0, 0.0);
+        glVertex3f(self.portaPos+self.portaLargura, 2, 0) 
+
+        glTexCoord2f (3.0, 3.0);
+        glVertex3f(4, 2, 0) 
+
+        glTexCoord2f (0.0, 3.0);
+        glVertex3f(4, 0, 0)     
     
-    
-#    glBegin(GL_POLYGON)
-    #gluCylinder(textura, largura da base, largura do topo, altura, resoluc
+        glEnd()
+
+        glDisable(GL_TEXTURE_2D)
+        
+        glPopMatrix()
+        glPopMatrix()
+
+
+paredes = Parede.criarParedes(qtd=4, espacamento=6)
+
 
 
 def read_texture(filename):
