@@ -39,7 +39,7 @@ def personagem():
     glPushMatrix()
     color = [0.4, 0.4, 0.2, 1.0]
     glMaterialfv(GL_FRONT, GL_DIFFUSE, color)
-    glutSolidSphere(widthPersonagem/2, 100, 20)
+    glutSolidSphere(raioPersonagem, 100, 20)
     glPopMatrix()
 
 def tela():
@@ -88,7 +88,15 @@ def tela():
     glFlush()                    # Aplica o desenho
 
 def resetGame():
-    xPersonagem, yPersonagem, zPersonagem, xCamFim, yCamFim, zCamFim, mode = 0, 1, 4, 0, 1, 0, 0
+    global xPersonagem 
+    global yPersonagem
+    global zPersonagem
+    global xCamFim
+    global yCamFim
+    global zCamFim
+    global mode
+    global variaveisIniciais
+    xPersonagem, yPersonagem, zPersonagem, xCamFim, yCamFim, zCamFim, mode = variaveisIniciais
 
 # Funcao callback chamada para gerenciar eventos de teclas normais 
 def Teclado (tecla, x, y):
@@ -163,9 +171,18 @@ def TeclasEspeciais (tecla, x, y):
     glutPostRedisplay()   
 
 def Timer(tempo):
+    global xPersonagem
+    global zPersonagem
+    global raioPersonagem
     for p in paredes:
         p.atualizarPos()
+        if(((xPersonagem - raioPersonagem)<= p.portaPos) and ((zPersonagem-raioPersonagem)<=p.zPos and (zPersonagem+raioPersonagem)>=p.zPos)
+           or ((xPersonagem + raioPersonagem)>= p.portaPos+p.portaLargura) and ((zPersonagem-raioPersonagem)<=p.zPos and (zPersonagem+raioPersonagem)>=p.zPos)
+           ):
+            resetGame()
+            break
 
+    
     glutPostRedisplay()
     glutTimerFunc(100,Timer, 0)
 

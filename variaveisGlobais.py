@@ -23,6 +23,7 @@ angulocanhao = 0
 bala_xi= 0
 posiLuz = 0
 widthPersonagem = 0.5
+raioPersonagem = widthPersonagem/2
 mode = 0
 
 velocidade = 0.5#0.05
@@ -32,3 +33,4 @@ minPorta = 1
 maxPorta = 2.8
 
 larguraCampo = 4
+variaveisIniciais = [xPersonagem, yPersonagem, zPersonagem, xCamFim, yCamFim, zCamFim, mode]
