@@ -11,9 +11,10 @@ def parede():
     glPushMatrix()                # Push e Pop Isolam os efeitos das transformacoes no objeto
     
     glTranslate( 0, 0, 0)
-    tex = read_texture('parede.jpg')
+    tex = read_texture('gritwall2.jpg')
     glEnable(GL_TEXTURE_2D)
     glBindTexture(GL_TEXTURE_2D, tex)
+    glColor3f(0, 0, 1)
 
     glBegin(GL_POLYGON)
     glTexCoord2f (0.0, 0.0);

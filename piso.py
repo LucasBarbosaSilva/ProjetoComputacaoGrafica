@@ -12,7 +12,7 @@ def piso():
 
     glPushMatrix()
 
-    tex = read_texture('tijolo_pedra.jpg')   # testar com tijolo_pedra.jpg  e xadrez.jpg
+    tex = read_texture('tijolo_pedra2.jpg')   # testar com tijolo_pedra.jpg  e xadrez.jpg
     glEnable(GL_TEXTURE_2D)
     glBindTexture(GL_TEXTURE_2D, tex)
     
