@@ -20,16 +20,23 @@ def desenho():
     global angulocanhao
     global bala_xi
 
+    # eixos.eixos()
+    # glPushMatrix()
+    # glTranslate(-2, 0, -6)
+    # parede()
+    # glPopMatrix()
+    # glPushMatrix()
+    # glTranslate(-2, 0, 0)
+    # parede()
+    # glPopMatrix()
+
     eixos.eixos()
-    glPushMatrix()
-    glTranslate(-2, 0, -6)
-    parede()
-    glPopMatrix()
-    glPushMatrix()
-    glTranslate(-2, 0, 0)
-    parede()
-    glPopMatrix()
+
+    for p in paredes:
+        p.desenhar()
+
     piso()
+
     # Paredes laterais
     glPushMatrix()
     glTranslate(-2, 0, 6)
