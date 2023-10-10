@@ -5,10 +5,10 @@ from OpenGL.GLUT import *
 widthTela = 1080
 heigthTela = 720
 esqDirCamIni = 0
-xCamIni = 0
-zCamIni = 0
-yCamIni = 1
-zCamIni = 0
+xPersonagem = 0
+zPersonagem = 0
+yPersonagem = 2
+zPersonagem = 4
 xCamFim = 0
 yCamFim = 1
 zCamFim = 0

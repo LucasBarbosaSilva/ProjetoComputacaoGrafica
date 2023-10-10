@@ -58,7 +58,8 @@ def tela():
     #    upx, upy, upz = indica a posicao vertical da camera.
     if(mode == 0):
     #                    (x, y, z) Câmera                   |   (x, y, z,) Objeto      |   posicao 
-        gluLookAt(xCamIni, 1 + yCamIni, cos(zCamIni)*4, xCamFim, yCamFim, zCamFim, 0,1,0) # Especifica posicao do observador e do alvo
+        # gluLookAt(xPersonagem, yPersonagem, cos(zPersonagem)*4, xCamFim, yCamFim, zCamFim, 0,1,0) # Especifica posicao do observador e do alvo
+        gluLookAt(xPersonagem, yPersonagem, zPersonagem-1, xCamFim, yCamFim, zCamFim, 0,1,0) # Especifica posicao do observador e do alvo
     else:
         gluLookAt(0, 5, 8, xCamFim, yCamFim, zCamFim, 0,1,0) # Especifica posicao do observador e do alvo
     iluminacao_da_cena()
@@ -69,22 +70,22 @@ def tela():
     glFlush()                    # Aplica o desenho
 
 def resetGame():
-    global xCamIni
-    global yCamIni
-    global zCamIni
+    global xPersonagem
+    global yPersonagem
+    global zPersonagem
     global xCamFim
     global yCamFim
     global zCamFim
     global mode
-    xCamIni, yCamIni, zCamIni, xCamFim, yCamFim, zCamFim, mode = 0, 1, 0, 0, 1, 0, 0
+    xPersonagem, yPersonagem, zPersonagem, xCamFim, yCamFim, zCamFim, mode = 0, 1, 0, 0, 1, 0, 0
 
 # Funcao callback chamada para gerenciar eventos de teclas normais 
 def Teclado (tecla, x, y):
     global esqDirCamIni
-    global xCamIni
-    global yCamIni
-    global zCamIni
-    global zCamIni
+    global xPersonagem
+    global yPersonagem
+    global zPersonagem
+    global zPersonagem
     global xCamFim
     global yCamFim
     global zCamFim
@@ -109,7 +110,7 @@ def Teclado (tecla, x, y):
         print(xCamFim)
         if (xCamFim - 0.1 >= (-widthTela/2)+(widthPersonagem/2)):
             xCamFim -= 0.1
-            xCamIni -= 0.1
+            xPersonagem -= 0.1
             print("Andou")
 	
     if tecla == b'd': # D -> Direita
@@ -117,7 +118,7 @@ def Teclado (tecla, x, y):
         print(xCamFim)
         if (xCamFim + 0.1 <= (widthTela/2)-(widthPersonagem/2)):
             xCamFim += 0.1
-            xCamIni += 0.1
+            xPersonagem += 0.1
             print("Andou")
 
     if tecla == b'r':

@@ -6,10 +6,12 @@ import variaveisGlobais
 from parede import *
 from piso import *
 from paredeLateral import *
+from personagem import *
+
 def desenho():
-    global xCamIni
-    global yCamIni
-    global zCamIni
+    global xPersonagem
+    global yPersonagem
+    global zPersonagem
     global xCamFim
     global yCamFim
     global zCamFim
@@ -37,6 +39,11 @@ def desenho():
     glPushMatrix()
     glTranslate(2, 0, 6)
     paredeLateral()    
+    glPopMatrix()
+
+    glPushMatrix()
+    glTranslate(xPersonagem, yPersonagem, zPersonagem)
+    personagem()    
     glPopMatrix()
     
 
