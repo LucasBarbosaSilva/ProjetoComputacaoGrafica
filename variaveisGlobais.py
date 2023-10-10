@@ -24,3 +24,11 @@ bala_xi= 0
 posiLuz = 0
 widthPersonagem = 0.5
 mode = 0
+
+velocidade = 0.5#0.05
+espacamentoParedes = 6 # Espaço até a próxima parede
+numParedes = 4 # Número de paredes visíveis
+minPorta = 1
+maxPorta = 2.8
+
+larguraCampo = 4

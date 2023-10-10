@@ -164,6 +164,10 @@ def TeclasEspeciais (tecla, x, y):
 
 def Timer(tempo):
     print("Timer rodando")
+
+    for p in paredes:
+        p.atualizarPos()
+
     glutPostRedisplay()
     glutTimerFunc(33,Timer, 0)
 
